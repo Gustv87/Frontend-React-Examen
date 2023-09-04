@@ -1,5 +1,9 @@
 import {React , useEffect, useState} from 'react'
-import Table from 'react-bootstrap/Table';
+import Table from 'react-bootstrap/Table'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/esm/Container'
+
 
 var url  = "http://localhost:3000/api/rol";
 
@@ -23,22 +27,25 @@ export const Roles = () => {
 
   return (
     <>
-        <h1>Roles</h1>
-
+        <Container fluid="md mt-5">
         
-
-        <h1>Reporte de Roles</h1>
-        <Table striped bordered hover>
+        <Row className='justify-content-md-center '>
+        <h1 className='text-center p-3'>Reporte de Usuario</h1>
+            <Col className='col-lg-6 col-sm-12'>  
+                
+              <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Nombre Rol</th>
+              <th className='text-center'>ID</th>
+              <th className='text-center'>NOMBRE ROL</th>
             </tr>
           </thead>
           <tbody>
             { datos.map( x=> <tr key={x.id}><td>{x.id}</td><td>{x.nombre_rol}</td></tr>    ) }
           </tbody>
-        </Table>
+        </Table></Col>
+        </Row>
+    </Container>
 
     </>
   )

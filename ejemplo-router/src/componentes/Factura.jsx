@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 
 var url  = "http://localhost:3000/api/factura";
 
-export const factura = () => {
+export const Factura = () => {
 
   const [datos , setDatos] = useState([]);
 

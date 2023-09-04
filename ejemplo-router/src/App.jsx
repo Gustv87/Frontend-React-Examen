@@ -6,6 +6,7 @@ import { Pais } from './componentes/Pais'
 import { Inicio } from './componentes/Inicio'
 import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
+import { Factura } from './componentes/Factura'
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         <Menu />
         <Routes>
           <Route path='/' element={ <Inicio />}  ></Route>
-          <Route path='/usuarios' element={ <Usuarios />}  ></Route>
+          <Route path='/Usuarios' element={ <Usuarios />}  ></Route>
+          <Route path='/Factura' element={ <Factura />}  ></Route>
           <Route path='/roles' element={ <Roles />}  ></Route>
           <Route path='/ciudad' element={ <Ciudad />}  ></Route>
           <Route path='/pais' element={ <Pais />}  ></Route>

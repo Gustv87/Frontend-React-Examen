@@ -1,7 +1,7 @@
 import {React , useEffect, useState} from 'react'
 import Table from 'react-bootstrap/Table';
 
-var url  = "http://localhost:3000/api/factura";
+var url  = "http://localhost:3000/api/fctura";
 
 export const Factura = () => {
 

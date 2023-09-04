@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path='/' element={ <Inicio />}  ></Route>
           <Route path='/Usuarios' element={ <Usuarios />}  ></Route>
-          <Route path='/Factura' element={ <Factura />}  ></Route>
+          <Route path='/factura' element={ <Factura />}  ></Route>
           <Route path='/roles' element={ <Roles />}  ></Route>
           <Route path='/ciudad' element={ <Ciudad />}  ></Route>
           <Route path='/pais' element={ <Pais />}  ></Route>

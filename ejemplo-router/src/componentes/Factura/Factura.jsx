@@ -12,50 +12,61 @@ export const Factura = () => {
   const [id_direccion, setIddireccion] = useState([]);
   
 
-
-
   const getCorreo = async () => {
     try {
-        const response = await fetch("http://localhost:3000/api/Usuario");
-        if (!response.ok) {
-            throw new Error("Error al obtener correo del servidor");
-        }
-        const data = await response.json();
-        setCorreo(data);
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-const getId_Direccion = async () => {
-  try {
-      const response = await fetch("http://localhost:3000/api/direccion");
+      const response = await fetch(url);
       if (!response.ok) {
-          throw new Error("Error al obtener el id_direccion del servidor");
+        throw new Error('Error al obtener datos del servidor');
       }
       const data = await response.json();
+
+      setCorreo(data);
       
-      setIddireccion (data);
-  } catch (error) {
+    } catch (error) {
       console.error(error);
-  }
-};
+    }
+  };
 
-useEffect(() => {
-  get()
-  getId_Direccion();
-  getCorreo();
-}, []);
+  useEffect(() => {
+    getCorreo();
+  }, []);
 
-const handleCorreoChange = (event) => {
-  setCorreo(event.target.value);
-};
+  const handleCorreoChange = (event) => {
+    setCorreo(event.target.value);
+  };
+
+  const postCorreo = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ correo })
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar datos al servidor');
+      }
+
+      getCorreo();
+
+      setCorreo("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
   return (
     <> 
 
 <div className="container" style={{ maxWidth: "750px", margin: "0 auto", padding: "20px" }}>
                 <h1 className="text-center">Factura</h1>
-                <Form className='fluid-center'>
+                <Form onSubmit={postCorreo}>
                     <div className="mb-3">
                         <label className="form-label">correo</label>
                         <input

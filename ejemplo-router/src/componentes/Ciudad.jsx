@@ -5,10 +5,8 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/esm/Container'
 
 
-var url  = "http://localhost:3000/api/ciudad";
-
 export const Ciudad = () => {
-
+  
   const [datos , setDatos] = useState([]);
 
   const consumoCiudad = async ()=>{
@@ -27,7 +25,6 @@ export const Ciudad = () => {
 
   return (
     <>
-    
         <Container fluid="md mt-5">
         
         <Row className='justify-content-md-center '>
@@ -35,7 +32,6 @@ export const Ciudad = () => {
             <Col className='col-lg-6 col-sm-12'>  
                 
               <Table striped bordered hover>
-                
           <thead>
             <tr>
               <th className='text-center'>ID</th>
@@ -50,5 +46,5 @@ export const Ciudad = () => {
     </Container>
 
     </>
-  )
-}
+  );
+};

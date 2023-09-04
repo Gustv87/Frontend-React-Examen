@@ -27,8 +27,25 @@ export const Factura = () => {
     }
   };
 
+  
+  const getIddireccion = async () => {
+    try {
+        const response = await fetch("http://localhost:3000/api/direccion");
+        if (!response.ok) {
+            throw new Error("Error al obtener la direccion del servidor");
+        }
+        const data = await response.json();
+        
+        setIddireccion(data);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
   useEffect(() => {
     getCorreo();
+    getIddireccion
   }, []);
 
   const handleCorreoChange = (event) => {
@@ -68,12 +85,19 @@ export const Factura = () => {
                 <h1 className="text-center">Factura</h1>
                 <Form onSubmit={postCorreo}>
                     <div className="mb-3">
-                        <label className="form-label">correo</label>
+                        <label className="form-label">Correo</label>
                         <input
                             type="text"
                             className="form-control"
                             value={correo}
                             onChange={handleCorreoChange}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Fecha</label>
+                        <input
+                            type="date"
+                            className="form-control"
                         />
                     </div>
                     <Button type="submit" className="btn btn-primary">

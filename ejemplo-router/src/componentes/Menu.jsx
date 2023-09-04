@@ -17,6 +17,7 @@ export const Menu = () => {
                         <Nav.Link as={Link} to="/roles">Roles</Nav.Link>
                         <Nav.Link as={Link} to="/ciudad">Ciudades</Nav.Link>
                         <Nav.Link as={Link} to="/pais">Pais</Nav.Link>
+                        <Nav.Link as={Link} to="/direccion">Direccion</Nav.Link>
                         <Nav.Link as={Link} to="/factura">Factura</Nav.Link>
                         <Nav.Link as={Link} to="/foto">Foto</Nav.Link>
 

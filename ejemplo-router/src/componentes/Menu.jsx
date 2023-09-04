@@ -15,6 +15,8 @@ export const Menu = () => {
                         <Nav.Link as={Link} to="/roles">Roles</Nav.Link>
                         <Nav.Link as={Link} to="/ciudad">Ciudades</Nav.Link>
                         <Nav.Link as={Link} to="/pais">Pais</Nav.Link>
+                        <Nav.Link as={Link} to="/direccion">Dirección</Nav.Link>
+                        
                         
                     </Nav>
                 </Navbar.Collapse>

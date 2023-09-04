@@ -5,9 +5,9 @@ var url  = "http://localhost:3000/api/factura";
 
 export const Factura = () => {
 
-  const [datos , setDatos] = useState([]);
+  const [datos , setDatos] = UseState([]);
 
-  const consumoFactura = async ()=>{
+  const ConsumoFactura = async ()=>{
 
       const response = await fetch(url);
       const data = await response.json(); 
@@ -15,9 +15,9 @@ export const Factura = () => {
 
   };
 
-  useState( ()=>{
+  UseState( ()=>{
 
-    consumoFactura();
+    ConsumoFactura();
 
   }, []);
 

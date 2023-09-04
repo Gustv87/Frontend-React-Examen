@@ -8,7 +8,10 @@ import { Inicio } from './componentes/Inicio'
 import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
 import { Factura } from './componentes/Factura'
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 function App() {
   
@@ -22,7 +25,11 @@ function App() {
           <Route path='/roles' element={ <Roles />}  ></Route>
           <Route path='/ciudad' element={ <Ciudad />}  ></Route>
           <Route path='/pais' element={ <Pais />}  ></Route>
+<<<<<<< Updated upstream
           <Route path='/foto' element={ <Foto />}  ></Route>
+=======
+          <Route path='/factura' element={ <Factura />}  ></Route>
+>>>>>>> Stashed changes
           <Route path='*' element={ <Default />}  ></Route>
         </Routes>
       

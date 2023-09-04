@@ -1,28 +1,13 @@
-import { React, useEffect, useState } from 'react'
-import Table from 'react-bootstrap/Table';
-
-var url = "http://localhost:3000/api/ciudad";
 import {React , useEffect, useState} from 'react'
-import Table from 'react-bootstrap/Table';
+import Table from 'react-bootstrap/Table'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/esm/Container'
+
+
+var url  = "http://localhost:3000/api/ciudad";
 
 export const Ciudad = () => {
-
-  const [datos, setDatos] = useState([]);
-
-  const consumoCiudades = async () => {
-
-    const response = await fetch(url);
-    const data = await response.json();
-    setDatos(data);
-
-  };
-
-  useState(() => {
-
-    consumoCiudades();
-
-  }, []);
-
 
   const [datos , setDatos] = useState([]);
 
@@ -42,39 +27,27 @@ export const Ciudad = () => {
 
   return (
     <>
-      <h1>Ciudad</h1>
-
-
-
-      <h1>Reporte de Ciudades</h1>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Nombre Ciudad</th>
-          </tr>
-        </thead>
-        <tbody>
-          {datos.map(x => <tr key={x.id}><td>{x.id}</td><td>{x.nombre}</td></tr>)}
-        </tbody>
-      </Table>
-
-    </>
-    <>
-        <h1>Ciudad</h1>
-
-        <h1>Reporte de Ciudad</h1>
-        <Table striped bordered hover>
+    
+        <Container fluid="md mt-5">
+        
+        <Row className='justify-content-md-center '>
+        <h1 className='text-center p-3'>Reporte de Ciudades</h1>
+            <Col className='col-lg-6 col-sm-12'>  
+                
+              <Table striped bordered hover>
+                
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Nombre Ciudad</th>
+              <th className='text-center'>ID</th>
+              <th className='text-center'>NOMBRE CIUDAD</th>
             </tr>
           </thead>
           <tbody>
-            { datos.map( x=> <tr key={x.id}><td>{x.id}</td><td>{x.nombre_ciudad}</td></tr>    ) }
+            { datos.map( x=> <tr key={x.id}><td>{x.id}</td><td>{x.nombre}</td></tr>    ) }
           </tbody>
-        </Table>
+        </Table></Col>
+        </Row>
+    </Container>
 
     </>
   )

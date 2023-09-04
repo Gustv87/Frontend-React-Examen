@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/esm/Container'
 
-
+var url  = "http://localhost:3000/api/ciudad";
 export const Ciudad = () => {
   
   const [datos , setDatos] = useState([]);

@@ -34,14 +34,14 @@ export const Roles = () => {
             <Col className='col-lg-6 col-sm-12'>  
                 
               <Table striped bordered hover>
-          <thead>
+          <thead className='table-dark'>
             <tr>
               <th className='text-center'>ID</th>
               <th className='text-center'>NOMBRE ROL</th>
             </tr>
           </thead>
           <tbody>
-            { datos.map( x=> <tr key={x.id}><td>{x.id}</td><td>{x.nombre_rol}</td></tr>    ) }
+            { datos.map( x=> <tr key={x.id_rol}><td>{x.id_rol}</td><td>{x.nombre}</td></tr>    ) }
           </tbody>
         </Table></Col>
         </Row>

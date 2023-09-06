@@ -1,46 +1,57 @@
-
 import {React , useEffect, useState} from 'react'
-import Table from 'react-bootstrap/Table';
-
-var url  = "http://localhost:3000/api/producto";
-
+import Table from 'react-bootstrap/Table'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/esm/Container'
 
 export const Productos = () => {
-      const [datos , setDatos] = useState([]);
+  
+  var url  = "http://localhost:3000/api/producto";
 
-  const consumoProductos = async ()=>{
+  const [datos , setDatos] = useState([]);
 
-      const response = await fetch(url);
-      const data = await response.json(); 
-      setDatos(data);
+  const consumoUsuario = async ()=>{
 
-  };
+    const response = await fetch(url);
+    const data = await response.json(); 
+    setDatos(data);
 
-  useState( ()=>{
+};
 
-    consumoProductos();
+useState( ()=>{
 
-  }, []);
+  consumoUsuario();
+
+}, []);
 
   return (
     <>
-    <h1>Productos</h1>
-   
 
-    <h1>Reporte de productos</h1>
-    <Table striped bordered hover>
-      <thead>
+      
+    <Container fluid="md mt-5">
+        
+        <Row className='justify-content-md-center '>
+        <h1 className='text-center p-3'>Reporte de Productos</h1>
+            <Col className='col-lg-6 col-sm-12'>  
+                
+              <Table striped bordered hover>
+      <thead className='table-dark'>
         <tr>
-          <th>Id</th>
-          <th>Nombre Producto</th>
-          <th>Precio Producto</th>
+          <th className='text-center'>ID</th>
+          <th className='text-center'>NOMBRE</th>
+          <th className='text-center'>PRECIO</th>
+
         </tr>
       </thead>
       <tbody>
-        { datos.map( x=> <tr key={x.id}><td>{x.id}</td><td>{x.nombre}</td></tr>    ) }
+     
+     {datos.map(x=> <tr key={x.id_producto}><td>{x.id_producto}</td><td>{x.nombre}</td><td>{x.precio}</td></tr>)}
       </tbody>
-    </Table>
+    </Table></Col>
 
-</>
+        </Row>
+    </Container>
+    
+    </>
   )
 }

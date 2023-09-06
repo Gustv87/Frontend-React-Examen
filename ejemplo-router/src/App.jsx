@@ -3,13 +3,13 @@ import { Usuarios } from './componentes/Usuarios'
 import { Roles } from './componentes/Roles'
 import { Ciudad } from './componentes/Ciudad'
 import { Pais } from './componentes/Pais/Pais'
-import {Factura} from './componentes/Factura/Factura'
 import { Productos } from './componentes/Productos'
 import { Inicio } from './componentes/Inicio'
 import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
 import { Direccion} from './componentes/Direccion/Direccion'
 import { Foto } from './componentes/Foto'
+import { Factura } from './componentes/Factura'
 
 
 function App() {

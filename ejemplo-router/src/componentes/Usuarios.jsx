@@ -37,15 +37,16 @@ useState( ()=>{
             <Col className='col-lg-6 col-sm-12'>  
                 
               <Table striped bordered hover>
-      <thead>
+      <thead className='table-dark'>
         <tr>
           <th className='text-center'>CORREO</th>
           <th className='text-center'>NOMBRE</th>
-          <th className='text-center'>ROL</th>
+          <th className='text-center'>ID ROL</th>
+          <th className='text-center'>NOMBRE ROL</th>
         </tr>
       </thead>
       <tbody>
-      { datos.map( x=> <tr key={x.correo}><td>{x.correo}</td><td>{x.nombre}</td><td>{x.id_rol}</td></tr>    ) }
+      { datos.map( x=> <tr key={x.correo}><td>{x.correo}</td><td>{x.nombre}</td><td>{x.id_rol}</td><td>{x.rol}</td></tr>    ) }
      
       </tbody>
     </Table></Col>

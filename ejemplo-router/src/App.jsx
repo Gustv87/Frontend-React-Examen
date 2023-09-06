@@ -8,9 +8,9 @@ import { Productos } from './componentes/Productos'
 import { Inicio } from './componentes/Inicio'
 import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
-
 import { Direccion} from './componentes/Direccion/Direccion'
-
+import { Factura } from './componentes/Factura/Factura'
+import { Foto } from './componentes/Foto'
 
 function App() {
 

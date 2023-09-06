@@ -41,7 +41,7 @@ export const Roles = () => {
             </tr>
           </thead>
           <tbody>
-            { datos.map( x=> <tr key={x.id}><td>{x.id}</td><td>{x.nombre_rol}</td></tr>    ) }
+            { datos.map( x=> <tr key={x.id_rol}><td>{x.id_rol}</td><td>{x.nombre}</td></tr>    ) }
           </tbody>
         </Table></Col>
         </Row>

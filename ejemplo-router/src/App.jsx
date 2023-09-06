@@ -9,6 +9,8 @@ import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
 import { Direccion} from './componentes/Direccion/Direccion'
 import { Foto } from './componentes/Foto'
+import { Factura } from './componentes/Factura'
+
 
 function App() {
 
@@ -22,8 +24,9 @@ function App() {
           <Route path='/ciudad' element={ <Ciudad />}  ></Route>
           <Route path='/pais' element={ <Pais />}  ></Route>
           <Route path='/direccion' element={ <Direccion />}  ></Route>
-
+          <Route path='/factura' element={ <Factura />}  ></Route>
           <Route path='/productos' element={ <Productos />}  ></Route>
+          <Route path='/foto' element={ <Foto />}  ></Route>
           <Route path='*' element={ <Default />}  ></Route>
         </Routes>
       

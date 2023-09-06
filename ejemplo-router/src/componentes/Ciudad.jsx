@@ -36,10 +36,11 @@ export const Ciudad = () => {
             <tr>
               <th className='text-center'>ID</th>
               <th className='text-center'>NOMBRE CIUDAD</th>
+              <th className='text-center'>NOMBRE PAIS</th>
             </tr>
           </thead>
           <tbody>
-            { datos.map( x=> <tr key={x.id}><td>{x.id}</td><td>{x.nombre_ci}</td></tr>    ) }
+            { datos.map( x=> <tr key={x.id}><td>{x.id}</td><td>{x.nombre_ci}</td><td>{x.nombre_pais} </td></tr>  ) }
           </tbody>
         </Table></Col>
         </Row>

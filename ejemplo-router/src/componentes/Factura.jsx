@@ -47,7 +47,7 @@ export const Factura = () => {
             </tr>
           </thead>
           <tbody>
-            { datos.map( x=> <tr key={x.id}><td>{x.id_factura}</td><td>{x.correo}</td><td>{x.id_direccion}</td><td>{x.fecha}</td></tr>    ) }
+            { datos.map( x=> <tr key={x.id_factura}><td>{x.id_factura}</td><td>{x.correo}</td><td>{x.id_direccion}</td><td>{x.fecha}</td></tr>    ) }
           </tbody>
         </Table></Col>
         </Row>

@@ -3,6 +3,8 @@ import { Usuarios } from './componentes/Usuarios'
 import { Roles } from './componentes/Roles'
 import { Ciudad } from './componentes/Ciudad'
 import { Pais } from './componentes/Pais/Pais'
+import {Factura} from './componentes/Factura/Factura'
+import { Productos } from './componentes/Productos'
 import { Inicio } from './componentes/Inicio'
 import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
@@ -22,6 +24,8 @@ function App() {
           <Route path='/ciudad' element={ <Ciudad />}  ></Route>
           <Route path='/pais' element={ <Pais />}  ></Route>
           <Route path='/direccion' element={ <Direccion />}  ></Route>
+          <Route path='/factura' element={ <Factura />}  ></Route>
+          <Route path='/productos' element={ <Productos />}  ></Route>
           <Route path='*' element={ <Default />}  ></Route>
         </Routes>
       

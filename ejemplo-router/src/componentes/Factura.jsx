@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/esm/Container'
 
 
-var url  = "http://localhost:3000/api/rol";
+var url  = "http://localhost:3000/api/factura";
 
 export const Factura = () => {
 

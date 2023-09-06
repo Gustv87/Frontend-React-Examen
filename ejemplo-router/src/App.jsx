@@ -5,6 +5,7 @@ import { Ciudad } from './componentes/Ciudad'
 import { Pais } from './componentes/Pais/Pais'
 import { Productos } from './componentes/Productos'
 import { Inicio } from './componentes/Inicio'
+import { FacturaDetalle } from './componentes/FacturaDetalle'
 import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
 import { Direccion} from './componentes/Direccion/Direccion'
@@ -25,6 +26,7 @@ function App() {
           <Route path='/pais' element={ <Pais />}  ></Route>
           <Route path='/direccion' element={ <Direccion />}  ></Route>
           <Route path='/factura' element={ <Factura />}  ></Route>
+          <Route path='/facturadetalle' element={ <FacturaDetalle />}  ></Route>
           <Route path='/productos' element={ <Productos />}  ></Route>
           <Route path='/foto' element={ <Foto />}  ></Route>
           <Route path='*' element={ <Default />}  ></Route>

@@ -57,7 +57,7 @@ export const Foto = () => {
   return (
     <Container fluid className="mt-5">
       <Row>
-        <Col md={6} className="mb-4">
+        <Col md={6} className="mx-auto mb-4">
           <div className="p-4 border rounded">
             <h1 className="text-center mb-3">Foto</h1>
             <Form onSubmit={postFoto}>
@@ -83,12 +83,10 @@ export const Foto = () => {
             </Form>
           </div>
         </Col>
-        <Col md={6}>
-       
-        </Col>
       </Row>
     </Container>
   );
+  
 };
 
 

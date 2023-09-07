@@ -81,22 +81,14 @@ export const Pais = () => {
             <tr>
               
               <th className="text-center">Nombre</th>
-              <th className="text-center">Estado</th>
+              
               <th className="text-center">Accion</th>
             </tr>
           </thead>
           <tbody>
             {datos.map((x) => (
               <tr key={x.id_pais}>
-                
                 <td >{x.nombre}</td>
-                <td className="text-center">
-                  {x.activo ? (
-                    <span className="text-success">Activo</span>
-                  ) : (
-                    <span className="text-danger">Inactivo</span>
-                  )}
-                </td>
                 <td className="text-center">
                   <button type="button" className="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">

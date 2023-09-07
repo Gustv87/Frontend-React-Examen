@@ -12,6 +12,7 @@ import { Foto } from './componentes/Foto'
 import { Factura } from './componentes/Factura'
 
 
+
 function App() {
 
   return (

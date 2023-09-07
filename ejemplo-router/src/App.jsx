@@ -1,4 +1,5 @@
 import { Default } from './componentes/Default'
+import  {Login}  from './componentes/login/login'
 import { Usuarios } from './componentes/Usuarios'
 import { Roles } from './componentes/Roles'
 import { Ciudad } from './componentes/Ciudad'
@@ -19,7 +20,9 @@ function App() {
     <>  
         <Menu />
         <Routes>
+         
           <Route path='/' element={ <Inicio />}  ></Route>
+          <Route path='/login' element={ <Login />}  ></Route>
           <Route path='/usuarios' element={ <Usuarios />}  ></Route>
           <Route path='/roles' element={ <Roles />}  ></Route>
           <Route path='/ciudad' element={ <Ciudad />}  ></Route>

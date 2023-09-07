@@ -12,7 +12,7 @@ export const Menu = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto ms-auto mb-2 mb-lg-0">
                         
-
+                      
                         <Nav.Link as={Link} to="/Usuarios">Usuarios</Nav.Link>
                         <Nav.Link as={Link} to="/roles">Roles</Nav.Link>
                         <Nav.Link as={Link} to="/ciudad">Ciudades</Nav.Link>

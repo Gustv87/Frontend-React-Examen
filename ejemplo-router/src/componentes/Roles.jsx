@@ -84,7 +84,7 @@ export const Roles = () => {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Crear País
+            Crear Rol
           </button>
           <br /><br />
         </form>

@@ -30,7 +30,7 @@ export const Ciudad = () => {
 
   const fetchCountries = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/paises"); // Adjust the URL to your API endpoint for countries
+      const response = await fetch("http://localhost:3000/api/pais"); // Adjust the URL to your API endpoint for countries
       if (!response.ok) {
         throw new Error('Error al obtener datos de países');
       }
@@ -85,7 +85,7 @@ export const Ciudad = () => {
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                 />
-                </Form.Group>
+              </Form.Group>
               <Form.Group controlId="formPais">
                 <Form.Label>País</Form.Label>
                 <Form.Control
@@ -93,13 +93,12 @@ export const Ciudad = () => {
                   value={nombrePais}
                   onChange={(e) => setNombrePais(e.target.value)}
                 >
-                   <option value="">Seleccionar País</option>
+                  <option value="">Seleccionar País</option>
                   {paises.map((pais) => (
                     <option key={pais.id} value={pais.nombre}>
                       {pais.nombre}
                     </option>
                   ))}
-
                 </Form.Control>
               </Form.Group>
               <Button variant="primary" type="submit" className="w-100">
@@ -116,6 +115,7 @@ export const Ciudad = () => {
                 <th className='text-center'>Id</th>
                 <th className='text-center'>Nombre Ciudad</th>
                 <th className='text-center'>Nombre Pais</th>
+                <th className='text-center'>Acciones</th> {/* New column for actions */}
               </tr>
             </thead>
             <tbody>
@@ -124,6 +124,16 @@ export const Ciudad = () => {
                   <td>{x.id_ciudad}</td>
                   <td>{x.nombre}</td>
                   <td>{x.nombre_pais}</td>
+                  <td className='text-center'>
+                    {/* Edit Button */}
+                    <button type="button" className="btn btn-primary mr-2">
+                      Edit
+                    </button>
+                    {/* Delete Button */}
+                    <button type="button" className="btn btn-danger">
+                      Borra
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -132,4 +142,4 @@ export const Ciudad = () => {
       </Row>
     </Container>
   );
-};
+              };

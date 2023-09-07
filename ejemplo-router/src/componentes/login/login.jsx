@@ -4,15 +4,20 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
+import './Login.css'; // Importa el archivo CSS para el estilo
+
 export const Login = ({ onLogin }) => {
-  const [show, setShow] = useState(true); // Abre el modal al inicio
+  const [show, setShow] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
+  const [allowClose, setAllowClose] = useState(false); // Variable para permitir o denegar el cierre del modal
 
   const handleClose = () => {
-    setShow(false);
-    setIsRegistering(false);
+    if (allowClose) {
+      setShow(false);
+      setIsRegistering(false);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -24,33 +29,43 @@ export const Login = ({ onLogin }) => {
   };
 
   const handleLogin = async () => {
-    try {
-      const response = await axios.post('http://localhost:3000/api/login', credentials);
-      const { token } = response.data;
-      onLogin(token);
-      handleClose();
-    } catch (err) {
-      setError('Nombre de usuario o contraseña no válidos');
+    if (credentials.username && credentials.password) {
+      try {
+        const response = await axios.post('http://localhost:3000/api/login', credentials);
+        const { token } = response.data;
+        onLogin(token);
+        handleClose();
+      } catch (err) {
+        setError('Nombre de usuario o contraseña no válidos');
+      }
+    } else {
+      setError('Por favor, ingresa nombre de usuario y contraseña.');
     }
   };
 
   const handleRegister = async () => {
-    try {
-      // Realiza una solicitud POST para registrar un nuevo usuario
-      const response = await axios.post('http://localhost:3000/api/usuario', credentials);
+    if (credentials.username && credentials.password) {
+      try {
+        const response = await axios.post('http://localhost:3000/api/usuario', credentials);
 
-      // Verifica si el registro fue exitoso (puedes ajustar esta lógica según tu API)
-      if (response.status === 201) {
-       
-        window.location.href = 'http://localhost:3000/'; // Redirige a la página de inicio
+        if (response.status === 201) {
+          window.location.href = 'http://localhost:3000/';
+        }
+      } catch (err) {
+        setError('Error al registrar usuario');
       }
-    } catch (err) {
-      setError('Error al registrar usuario');
+    } else {
+      setError('Por favor, ingresa nombre de usuario y contraseña.');
     }
   };
 
+  const handleModalExited = () => {
+    // Restablece la validación al cerrar el modal
+    setAllowClose(false);
+  };
+
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} dialogClassName="modal-fullscreen" onExited={handleModalExited}>
       <Modal.Header closeButton>
         <Modal.Title>{isRegistering ? 'Registro' : 'Iniciar Sesión'}</Modal.Title>
       </Modal.Header>

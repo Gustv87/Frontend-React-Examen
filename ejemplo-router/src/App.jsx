@@ -12,13 +12,38 @@ import { Menu } from './componentes/Menu'
 import { Direccion} from './componentes/Direccion/Direccion'
 import { Foto } from './componentes/Foto'
 import { Factura } from './componentes/Factura'
+import { Header } from './componentes/Carrito/Header';
+import { ProductList } from './componentes/Carrito/ProductoLista';
 
 
 
 
 
 function App() {
+	const [allProducts, setAllProducts] = useState([]);
+	const [total, setTotal] = useState(0);
+	const [countProducts, setCountProducts] = useState(0);
 
+
+		<>
+			<Header
+				allProducts={allProducts}
+				setAllProducts={setAllProducts}
+				total={total}
+				setTotal={setTotal}
+				countProducts={countProducts}
+				setCountProducts={setCountProducts}
+			/>
+			<ProductList
+				allProducts={allProducts}
+				setAllProducts={setAllProducts}
+				total={total}
+				setTotal={setTotal}
+				countProducts={countProducts}
+				setCountProducts={setCountProducts}
+			/>
+		</>
+	
   return (
     <>  
         <Menu />
@@ -35,7 +60,9 @@ function App() {
           <Route path='/facturadetalle' element={ <FacturaDetalle />}  ></Route>
           <Route path='/productos' element={ <Productos />}  ></Route>
           <Route path='/foto' element={ <Foto />}  ></Route>
-          <Route path='*' element={ <Default />}  ></Route>
+		  <Route path='/producto' element={ <ProductoLista/>}  ></Route>
+          <Route path='/header' element={ <Header />}  ></Route>
+	      <Route path='*' element={ <Default />}  ></Route>
         </Routes>
       
     </>

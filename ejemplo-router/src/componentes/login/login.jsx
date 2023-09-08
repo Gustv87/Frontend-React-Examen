@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
-import './Login.css'; // Importa el archivo CSS para el estilo
 
 export const Login = ({ onLogin }) => {
   const [show, setShow] = useState(true);

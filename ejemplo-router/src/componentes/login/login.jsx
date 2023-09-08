@@ -1,116 +1,86 @@
-import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+
+<<<<<<< HEAD
+import { useState } from 'react';
 import axios from 'axios';
+=======
+>>>>>>> main
 
-import './Login.css'; // Importa el archivo CSS para el estilo
-
-export const Login = ({ onLogin }) => {
-  const [show, setShow] = useState(true);
-  const [isRegistering, setIsRegistering] = useState(false);
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
+export const Login = () => {
+  const [correo, setCorreo] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [allowClose, setAllowClose] = useState(false); // Variable para permitir o denegar el cierre del modal
 
-  const handleClose = () => {
-    if (allowClose) {
-      setShow(false);
-      setIsRegistering(false);
+  const url = "http://localhost:3000/api/login";
+
+  const handleCorreoChange = (event) => {
+    setCorreo(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Validar que los campos estén completos
+    if (correo.trim() === '' || password.trim() === '') {
+      setError('Por favor, complete todos los campos');
+      return;
     }
-  };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({
-      ...credentials,
-      [name]: value,
-    });
-  };
+    try {
+      const response = await axios.post(url, {
+        correo,
+        password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-  const handleLogin = async () => {
-    if (credentials.username && credentials.password) {
-      try {
-        const response = await axios.post('http://localhost:3000/api/login', credentials);
-        const { token } = response.data;
-        onLogin(token);
-        handleClose();
-      } catch (err) {
-        setError('Nombre de usuario o contraseña no válidos');
+      if (response.status === 200) {
+        // Inicio de sesión exitoso, redirigir a la página principal
+        window.location.href = '/';
       }
-    } else {
-      setError('Por favor, ingresa nombre de usuario y contraseña.');
-    }
-  };
-
-  const handleRegister = async () => {
-    if (credentials.username && credentials.password) {
-      try {
-        const response = await axios.post('http://localhost:3000/api/usuario', credentials);
-
-        if (response.status === 201) {
-          window.location.href = 'http://localhost:3000/';
-        }
-      } catch (err) {
-        setError('Error al registrar usuario');
+    } catch (error) {
+      // Manejar el error de respuesta del backend
+      if (error.response) {
+        setError(error.response.data.error);
+      } else {
+        setError('Error de conexión');
       }
-    } else {
-      setError('Por favor, ingresa nombre de usuario y contraseña.');
     }
-  };
-
-  const handleModalExited = () => {
-    // Restablece la validación al cerrar el modal
-    setAllowClose(false);
   };
 
   return (
-    <Modal show={show} onHide={handleClose} dialogClassName="modal-fullscreen" onExited={handleModalExited}>
-      <Modal.Header closeButton>
-        <Modal.Title>{isRegistering ? 'Registro' : 'Iniciar Sesión'}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Form.Group controlId="formUsername">
-            <Form.Label>Nombre de Usuario</Form.Label>
-            <Form.Control
-              type="text"
-              name="username"
-              placeholder="Ingresa tu nombre de usuario"
-              value={credentials.username}
-              onChange={handleInputChange}
+    <>
+      <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+        <h1 className="text-center">Iniciar Sesión</h1>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Correo Electrónico:</label>
+            <input
+              type="email"
+              className='form-control'
+              value={correo}
+              onChange={handleCorreoChange}
             />
-          </Form.Group>
-          <Form.Group controlId="formPassword">
-            <Form.Label>Contraseña</Form.Label>
-            <Form.Control
+          </div>
+          <div>
+            <label>Contraseña:</label>
+            <input
               type="password"
-              name="password"
-              placeholder="Ingresa tu contraseña"
-              value={credentials.password}
-              onChange={handleInputChange}
+              className='form-control'
+              value={password}
+              onChange={handlePasswordChange}
             />
-          </Form.Group>
-        </Form>
-        {error && <p className="text-danger">{error}</p>}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Cerrar
-        </Button>
-        {isRegistering ? (
-          <Button variant="primary" onClick={handleRegister}>
-            Registrarse
-          </Button>
-        ) : (
-          <Button variant="primary" onClick={handleLogin}>
-            Iniciar Sesión
-          </Button>
-        )}
-        <Button variant="link" onClick={() => setIsRegistering(!isRegistering)}>
-          {isRegistering ? '¿Ya tienes una cuenta? Iniciar Sesión' : '¿No tienes una cuenta? Regístrate'}
-        </Button>
-      </Modal.Footer>
-    </Modal>
+          </div>
+          <br />
+          <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
+        </form>
+      </div>
+    </>
   );
 };

@@ -1,107 +1,103 @@
-import { React, useEffect, useState } from 'react'
-import Table from 'react-bootstrap/Table'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/esm/Container'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-
+import { useState } from 'react';
+import axios from 'axios';
 
 export const Usuarios = () => {
+  const [correo, setCorreo] = useState('');
+  const [nombre_usuario, setNombreUsuario] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  var url = "http://localhost:3000/api/usuario";
+  const url = "http://localhost:3000/api/usuario";
 
-  const [datos, setDatos] = useState([]);
-
-  const consumoUsuario = async () => {
-
-    const response = await fetch(url);
-    const data = await response.json();
-    setDatos(data);
-
+  const handleNombreChange = (event) => {
+    setNombreUsuario(event.target.value);
   };
 
-  useState(() => {
+  const handleCorreoChange = (event) => {
+    setCorreo(event.target.value);
+  };
 
-    consumoUsuario();
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
-  }, []);
+  const postUsuario = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(url, {
+        correo,
+        nombre_usuario,
+        password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 200) {
+        // La solicitud se completó correctamente
+        setNombreUsuario('');
+        setCorreo('');
+        setPassword('');
+        setError('');
+        console.log(response.data);
+
+        // Borrar el mensaje de error después de 3 segundos (3000 milisegundos)
+        setTimeout(() => {
+          setError('');
+        }, 3000);
+      }
+    } catch (error) {
+      // Manejar el error de respuesta del backend
+      setError(error.response.data.error);
+
+      // Borrar el mensaje de error después de 3 segundos (3000 milisegundos)
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+    }
+  };
+
+
 
   return (
-
     <>
-
-<Container fluid="md">
-                <Col className='justify-content-md-center'>
-                    <h1 className='text-center p-3'>Usuario</h1>
-                </Col>
-
-                <Row className='justify-content-md-center'>
-                    <Col className='col-sm-12 col-lg-6'>
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nombre"
-                            className="mb-3"
-                        >
-                            <Form.Control type="name" placeholder="Erick" />
-                        </FloatingLabel>
-                      
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Correo Electronico"
-                            className="mb-3"
-                        >
-                            <Form.Control type="email" placeholder="name@example.com" />
-                        </FloatingLabel>
-                       
-                        <Form.Select aria-label="Floating label select example">
-            <option>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </Form.Select>
-                        <div className="d-grid gap-2 mt-3">
-                            <Button variant="primary" size="lg">
-                                Enviar
-                            </Button>
-
-                        </div>
-
-                    </Col>
-
-                </Row>
-            </Container>
-
-
-      <Container fluid="md mt-5">
-
-        <Row className='justify-content-md-center '>
-          <h1 className='text-center p-3'>Reporte de Usuario</h1>
-          <Col className='col-lg-6 col-sm-12'>
-
-            <Table striped bordered hover >
-              <thead className='table-dark'>
-                <tr>
-                  <th className='text-center'>CORREO</th>
-                  <th className='text-center'>NOMBRE</th>
-                  <th className='text-center'>ID ROL</th>
-                  <th className='text-center'>NOMBRE ROL</th>
-                </tr>
-              </thead>
-              <tbody>
-                {datos.map(x => <tr key={x.correo}><td>{x.correo}</td><td>{x.nombre}</td><td>{x.id_rol}</td><td>{x.rol}</td></tr>)}
-
-              </tbody>
-            </Table></Col>
-
-        </Row>
-      </Container>
-
-
+      <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+        <h1 className="text-center">Registro Usuario</h1>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <form onSubmit={postUsuario}>
+          <div>
+            <label>Nombre:</label>
+            <input
+              type="text"
+              className='form-control'
+              value={nombre_usuario}
+              onChange={handleNombreChange}
+            />
+          </div>
+          <div>
+            <label>Correo:</label>
+            <input
+              type="email"
+              className='form-control'
+              value={correo}
+              onChange={handleCorreoChange}
+            />
+          </div>
+          <div>
+            <label>Contraseña:</label>
+            <input
+              type="password"
+              className='form-control'
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </div>
+          <br />
+          <button type="submit" className="btn btn-primary">Enviar</button>
+          <br />
+        </form>
+      </div>
     </>
-
-
-
-  )
-}
+  );
+};

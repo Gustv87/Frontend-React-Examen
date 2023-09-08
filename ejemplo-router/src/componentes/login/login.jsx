@@ -1,9 +1,6 @@
 
-<<<<<<< HEAD
 import { useState } from 'react';
 import axios from 'axios';
-=======
->>>>>>> main
 
 export const Login = () => {
   const [correo, setCorreo] = useState('');

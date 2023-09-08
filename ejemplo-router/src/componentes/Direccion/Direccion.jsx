@@ -93,7 +93,7 @@ export const Direccion = () => {
 
   return (
     <>
-      <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+      <div className="container" style={{ maxWidth: "1000px", margin: "0 auto", padding: "20px" }}>
         <h1 className="text-center">Crear Dirección</h1>
 
         <form onSubmit={postDireccion}>

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { Default } from './componentes/Default'
 import { Login } from './componentes/login/login'
 import { Usuarios } from './componentes/Usuarios'
@@ -14,13 +15,32 @@ import { Foto } from './componentes/Foto'
 import { Factura } from './componentes/Factura'
 import { Header } from './componentes/Carrito/Header';
 import { ProductList } from './componentes/Carrito/ProductoLista';
+=======
+>>>>>>> Stashed changes
 
 import { useState } from 'react';
 
 function App() {
+<<<<<<< Updated upstream
   const [allProducts, setAllProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [countProducts, setCountProducts] = useState(0);
+=======
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const PrivateRoute = ({ element, path }) => {
+    return isLoggedIn ? (
+      <Route path={path} element={element} />
+    ) : (
+      <Navigate to="/login" replace />
+    );
+  };
+
+  PrivateRoute.propTypes = {
+    element: PropTypes.element.isRequired,
+    path: PropTypes.string.isRequired,
+  };
+>>>>>>> Stashed changes
 
 
   <>
@@ -62,10 +82,16 @@ function App() {
         <Route path='/header' element={<Header />}  ></Route>
         <Route path='*' element={<Default />}  ></Route>
       </Routes>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     </>
   );
 }
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 export default App;

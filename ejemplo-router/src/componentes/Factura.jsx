@@ -25,7 +25,34 @@ export const Factura = () => {
   }, []);
 
   return (
+    
     <>
+
+<h1 className="text-center">Crear Factura </h1>
+
+<form >
+  <div className="mb-3">
+    <label className="form-label">Correo</label>
+    <input
+      type="email"
+      className="form-control"
+      
+    />
+  </div>
+  <div className="mb-3">
+    <label className="form-label">Fecha</label>
+    <input
+      type="date"
+      className="form-control"
+    />
+  </div>
+
+  <button type="submit" className="btn btn-primary">
+    Crear Factura
+  </button>
+  <br /><br />
+</form>
+
         <Container fluid="md mt-5">
         
         <Row className='justify-content-md-center '>

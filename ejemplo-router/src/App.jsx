@@ -10,11 +10,8 @@ import { FacturaDetalle } from './componentes/FacturaDetalle'
 import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
 import { Direccion } from './componentes/Direccion/Direccion'
-import { Foto } from './componentes/Foto'
 import { Factura } from './componentes/Factura'
-import { Header } from './componentes/Carrito/Header';
-import { ProductList } from './componentes/Carrito/ProductoLista';
-
+import { Comprar } from './componentes/Comprar'
 import { useState } from 'react';
 
 function App() {
@@ -28,24 +25,6 @@ function App() {
     setInicioSesion(val);
   }
 
-  <>
-    <Header
-      allProducts={allProducts}
-      setAllProducts={setAllProducts}
-      total={total}
-      setTotal={setTotal}
-      countProducts={countProducts}
-      setCountProducts={setCountProducts}
-    />
-    <ProductList
-      allProducts={allProducts}
-      setAllProducts={setAllProducts}
-      total={total}
-      setTotal={setTotal}
-      countProducts={countProducts}
-      setCountProducts={setCountProducts}
-    />
-  </>
 
   return (
     <>
@@ -66,9 +45,10 @@ function App() {
        { inicioSesion && <Route path='/factura' element={<Factura />}  ></Route> }
        { inicioSesion && <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>}
        { inicioSesion && <Route path='/productos' element={<Productos />}  ></Route>}
+       { inicioSesion && <Route path='/comprar' element={<Comprar />}  ></Route>}
         
-        {/* <Route path='/producto' element={<ProductoLista />}  ></Route> */}
-        { inicioSesion && <Route path='/header' element={<Header />}  ></Route>}
+  
+     
         { inicioSesion && <Route path='*' element={<Default />}  ></Route>}
         { inicioSesion==false && <Route path='*' element={<Login />}  ></Route>}
 

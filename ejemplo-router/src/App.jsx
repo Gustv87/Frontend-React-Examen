@@ -24,6 +24,9 @@ function App() {
 
   const [inicioSesion , setInicioSesion] = useState(false);
 
+  const onInicioSesion = (val) =>{
+    setInicioSesion(val);
+  }
 
   <>
     <Header
@@ -53,7 +56,7 @@ function App() {
       
       <Routes>
 
-      { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {setInicioSesion}  />}  ></Route> }
+      { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {onInicioSesion}  />}  ></Route> }
       { inicioSesion &&  <Route path='/' element={<Inicio />}   ></Route> }    
        { inicioSesion &&  <Route path='/usuarios' element={<Usuarios />}   ></Route> }
        { inicioSesion && <Route path='/roles' element={<Roles />}  ></Route> }

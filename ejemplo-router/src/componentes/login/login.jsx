@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-export const Login = ({setInicioSesion}) => {
+export const Login = ({dataSesion}) => {
+
 
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
@@ -28,21 +29,35 @@ export const Login = ({setInicioSesion}) => {
     }
 
     try {
-      const response = await axios.post(url, {
-        correo,
-        password,
-      }, {
+
+      const bodyResponse = 
+      {
+          correo : "fernando.lopez@gmail.com",
+          password :"Hola12$"
+      
+      };
+      
+      const response = await fetch(url, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(bodyResponse) // Enviar el nombre como JSON al servidor
       });
 
+
+      const jsonResponse = await response.json();
+
       if (response.status === 200) {
-        setInicioSesion(true);
-        window.location.href = '/';
+        console.log(jsonResponse);
+        dataSesion( true );
+        
       }
     } catch (error) {
       // Manejar el error de respuesta del backend
+
+      console.log(error);
+
       if (error.response) {
         setError(error.response.data.error);
       } else {

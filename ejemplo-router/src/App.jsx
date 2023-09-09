@@ -22,6 +22,8 @@ function App() {
   const [total, setTotal] = useState(0);
   const [countProducts, setCountProducts] = useState(0);
 
+  const [inicioSesion , setInicioSesion] = useState(false);
+
 
   <>
     <Header
@@ -44,23 +46,29 @@ function App() {
 
   return (
     <>
-      <Menu />
+
+      
+      
+      { inicioSesion && <Menu /> }
+      
       <Routes>
 
-        <Route path='/' element={<Inicio />}  ></Route>
-        <Route path='/login' element={<Login />}  ></Route>
-        <Route path='/usuarios' element={<Usuarios />}  ></Route>
-        <Route path='/roles' element={<Roles />}  ></Route>
-        <Route path='/ciudad' element={<Ciudad />}  ></Route>
-        <Route path='/pais' element={<Pais />}  ></Route>
-        <Route path='/direccion' element={<Direccion />}  ></Route>
-        <Route path='/factura' element={<Factura />}  ></Route>
-        <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>
-        <Route path='/productos' element={<Productos />}  ></Route>
-        <Route path='/foto' element={<Foto />}  ></Route>
+      { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {setInicioSesion}  />}  ></Route> }
+      { inicioSesion &&  <Route path='/' element={<Inicio />}   ></Route> }    
+       { inicioSesion &&  <Route path='/usuarios' element={<Usuarios />}   ></Route> }
+       { inicioSesion && <Route path='/roles' element={<Roles />}  ></Route> }
+       { inicioSesion && <Route path='/ciudad' element={<Ciudad />}  ></Route> }
+       { inicioSesion && <Route path='/pais' element={<Pais />}  ></Route> }
+       { inicioSesion && <Route path='/direccion' element={<Direccion />}  ></Route> }
+       { inicioSesion && <Route path='/factura' element={<Factura />}  ></Route> }
+       { inicioSesion && <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>}
+       { inicioSesion && <Route path='/productos' element={<Productos />}  ></Route>}
+        
         {/* <Route path='/producto' element={<ProductoLista />}  ></Route> */}
-        <Route path='/header' element={<Header />}  ></Route>
-        <Route path='*' element={<Default />}  ></Route>
+        { inicioSesion && <Route path='/header' element={<Header />}  ></Route>}
+        { inicioSesion && <Route path='*' element={<Default />}  ></Route>}
+        { inicioSesion==false && <Route path='*' element={<Login />}  ></Route>}
+
       </Routes>
 
     </>

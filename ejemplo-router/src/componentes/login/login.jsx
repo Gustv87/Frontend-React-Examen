@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-export const Login = () => {
+export const Login = ({setInicioSesion}) => {
+
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -37,7 +38,7 @@ export const Login = () => {
       });
 
       if (response.status === 200) {
-        // Inicio de sesión exitoso, redirigir a la página principal
+        setInicioSesion(true);
         window.location.href = '/';
       }
     } catch (error) {

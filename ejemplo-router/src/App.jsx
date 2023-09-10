@@ -1,9 +1,8 @@
-<<<<<<< Updated upstream
 import { Default } from './componentes/Default'
 import { Login } from './componentes/login/login'
 import { Usuarios } from './componentes/Usuarios'
 import { Roles } from './componentes/Roles'
-import { Ciudad } from './componentes/Ciudad'
+import { Ciudad } from './componentes/Ciudad/Ciudad'
 import { Pais } from './componentes/Pais/Pais'
 import { Productos } from './componentes/Productos'
 import { Inicio } from './componentes/Inicio'
@@ -11,21 +10,17 @@ import { FacturaDetalle } from './componentes/FacturaDetalle'
 import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
 import { Direccion } from './componentes/Direccion/Direccion'
-import { Foto } from './componentes/Foto'
 import { Factura } from './componentes/Factura'
 import { Header } from './componentes/Carrito/Header';
 import { ProductList } from './componentes/Carrito/ProductoLista';
-=======
->>>>>>> Stashed changes
+import { Comprar } from './componentes/Comprar'
 
 import { useState } from 'react';
 
 function App() {
-<<<<<<< Updated upstream
   const [allProducts, setAllProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [countProducts, setCountProducts] = useState(0);
-=======
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const PrivateRoute = ({ element, path }) => {
@@ -40,58 +35,41 @@ function App() {
     element: PropTypes.element.isRequired,
     path: PropTypes.string.isRequired,
   };
->>>>>>> Stashed changes
 
 
-  <>
-    <Header
-      allProducts={allProducts}
-      setAllProducts={setAllProducts}
-      total={total}
-      setTotal={setTotal}
-      countProducts={countProducts}
-      setCountProducts={setCountProducts}
-    />
-    <ProductList
-      allProducts={allProducts}
-      setAllProducts={setAllProducts}
-      total={total}
-      setTotal={setTotal}
-      countProducts={countProducts}
-      setCountProducts={setCountProducts}
-    />
-  </>
+  const [inicioSesion , setInicioSesion] = useState(false);
+
+  const onInicioSesion = (val) =>{
+    setInicioSesion(val);
+  }
+
 
   return (
     <>
-      <Menu />
+
+      
+      
+      { inicioSesion && <Menu /> }
+      
       <Routes>
 
-        <Route path='/' element={<Inicio />}  ></Route>
-        <Route path='/login' element={<Login />}  ></Route>
-        <Route path='/usuarios' element={<Usuarios />}  ></Route>
-        <Route path='/roles' element={<Roles />}  ></Route>
-        <Route path='/ciudad' element={<Ciudad />}  ></Route>
-        <Route path='/pais' element={<Pais />}  ></Route>
-        <Route path='/direccion' element={<Direccion />}  ></Route>
-        <Route path='/factura' element={<Factura />}  ></Route>
-        <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>
-        <Route path='/productos' element={<Productos />}  ></Route>
-        <Route path='/foto' element={<Foto />}  ></Route>
-        {/* <Route path='/producto' element={<ProductoLista />}  ></Route> */}
-        <Route path='/header' element={<Header />}  ></Route>
-        <Route path='*' element={<Default />}  ></Route>
-      </Routes>
-<<<<<<< Updated upstream
+      { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {onInicioSesion}  />}  ></Route> }
+      { inicioSesion &&  <Route path='/' element={<Inicio />}   ></Route> }    
+       { inicioSesion &&  <Route path='/usuarios' element={<Usuarios />}   ></Route> }
+       { inicioSesion && <Route path='/roles' element={<Roles />}  ></Route> }
+       { inicioSesion && <Route path='/ciudad' element={<Ciudad />}  ></Route> }
+       { inicioSesion && <Route path='/pais' element={<Pais />}  ></Route> }
+       { inicioSesion && <Route path='/direccion' element={<Direccion />}  ></Route> }
+       { inicioSesion && <Route path='/factura' element={<Factura />}  ></Route> }
+       { inicioSesion && <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>}
+       { inicioSesion && <Route path='/productos' element={<Productos />}  ></Route>}
+       { inicioSesion && <Route path='/comprar' element={<Comprar />}  ></Route>}
+        { inicioSesion && <Route path='*' element={<Default />}  ></Route>}
+        { inicioSesion==false && <Route path='*' element={<Login />}  ></Route>}
 
-=======
->>>>>>> Stashed changes
+      </Routes>
     </>
   );
 }
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 export default App;

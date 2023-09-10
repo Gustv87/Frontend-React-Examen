@@ -45,7 +45,7 @@ export const Productos = () => {
       formData.append("nombre", nombre);
       formData.append("precio", precio);
       if (file) {
-        formData.append("archivo", file);
+        formData.append("foto", file);
       }
 
       const response = await fetch(url, {
@@ -98,6 +98,7 @@ export const Productos = () => {
             <input
               type="file"
               className="form-control"
+              
               onChange={handleFileChange}
             />
           </div>
@@ -118,10 +119,10 @@ export const Productos = () => {
           </thead>
           <tbody>
             {datos.map((x) => (
-              <tr key={x.id_pais}>
+              <tr key={x.id_producto}>
                 <td >{x.nombre}</td>
                 <td >{x.precio}</td>
-                <td >{x.foto}</td>
+                <td><img src={`data:image/png;base64,${x.foto}`} alt="Product" /></td>
                 <td className="text-center">
                   <button type="button" className="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">

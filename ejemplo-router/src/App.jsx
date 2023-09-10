@@ -11,8 +11,6 @@ import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
 import { Direccion } from './componentes/Direccion/Direccion'
 import { Factura } from './componentes/Factura'
-import { Header } from './componentes/Carrito/Header';
-import { ProductList } from './componentes/Carrito/ProductoLista';
 import { Comprar } from './componentes/Comprar'
 
 import { useState } from 'react';

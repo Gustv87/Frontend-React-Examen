@@ -12,7 +12,6 @@ import { Menu } from './componentes/Menu'
 import { Direccion } from './componentes/Direccion/Direccion'
 import { Factura } from './componentes/Factura'
 import { Comprar } from './componentes/Comprar'
-
 import { useState } from 'react';
 
 function App() {

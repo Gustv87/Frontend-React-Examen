@@ -17,7 +17,7 @@ export const CartProvider = ({ children }) => {
 
   const getProductsCart = async () => {
     return await axios
-      .get("http://localhost:3000/api/producto-carrito")
+      .get("http://localhost:3000/api/producto")
       .then(({ data }) => setCartItems(data.productsCart))
       .catch((error) => console.error(error));
   };
@@ -30,7 +30,7 @@ export const CartProvider = ({ children }) => {
   const addItemToCart = async (product) => {
     const { nombre, img, precio } = product;
 
-    await axios.post("http://localhost:3000/api/producto-carrito", { nombre, img, precio });
+    await axios.post("http://localhost:3000/api/producto", { nombre, img, precio });
 
     getProducts();
     getProductsCart();
@@ -39,11 +39,11 @@ export const CartProvider = ({ children }) => {
   const editItemToCart = async (id, query, amount) => {
     if (query === "del" && amount === 1) {
       await axios
-        .delete(`http://localhost:3000/api/producto-carrito/${id}`)
+        .delete(`http://localhost:3000/api/producto/${id}`)
         .then(({ data }) => console.log(data));
     } else {
       await axios
-        .put(`http://localhost:3000/api/producto-carrito/${id}?query=${query}`, {
+        .put(`http://localhost:3000/api/producto/${id}?query=${query}`, {
           amount,
         })
         .then(({ data }) => console.log(data));

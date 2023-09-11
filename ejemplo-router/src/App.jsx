@@ -1,6 +1,6 @@
 import { Default } from './componentes/Default'
 import { Login } from './componentes/login/login'
-import { Usuarios } from './componentes/Usuarios'
+import { Usuarios } from './componentes/Usuario/Usuarios'
 import { Roles } from './componentes/Roles'
 import { Ciudad } from './componentes/Ciudad/Ciudad'
 import { Pais } from './componentes/Pais/Pais'

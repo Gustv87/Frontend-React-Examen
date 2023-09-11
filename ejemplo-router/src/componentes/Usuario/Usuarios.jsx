@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './Usuario.css'
 
 export const Usuarios = () => {
   const [correo, setCorreo] = useState('');
@@ -23,6 +25,7 @@ export const Usuarios = () => {
 
   const postUsuario = async (event) => {
     event.preventDefault();
+   
     try {
       const response = await axios.post(url, {
         correo,
@@ -62,7 +65,7 @@ export const Usuarios = () => {
 
   return (
     <>
-      <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+      <div className="container" style={{ maxWidth: "100%", margin: "0 auto", padding: "20px" }}>
         <h1 className="text-center">Registro Usuario</h1>
         {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={postUsuario}>
@@ -94,7 +97,20 @@ export const Usuarios = () => {
             />
           </div>
           <br />
-          <button type="submit" className="btn btn-primary">Enviar</button>
+          <button type="submit" className="btn btn-primary">
+            <Link
+              className='btn-crear'
+              to="/"
+              onClick={(event) => {
+                if (correo.trim() === '' || nombre_usuario.trim() === '' || password === '') {
+                  event.preventDefault();
+                  alert('Los campos no pueden estar vacíos');
+                }
+              }}
+            >
+              Crear Usuario
+            </Link>
+          </button>
           <br />
         </form>
       </div>

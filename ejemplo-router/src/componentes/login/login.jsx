@@ -1,18 +1,11 @@
-
 import { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
-
-// eslint-disable-next-line react/prop-types
-export const Login = ({dataSesion}) => {
-
-
+export const Login = ( dataSesion ) => {
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  // const history = useHistory();
-
   const url = "http://localhost:3000/api/login";
 
   const handleCorreoChange = (event) => {
@@ -33,33 +26,26 @@ export const Login = ({dataSesion}) => {
     }
 
     try {
-
-      const bodyResponse = 
-      {
-          correo : "fernando.lopez@gmail.com",
-          password :"Hola12$"
-      
+      const bodyResponse = {
+        correo: correo, 
+        password: password
       };
-      
+
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(bodyResponse) // Enviar el nombre como JSON al servidor
+        body: JSON.stringify(bodyResponse)
       });
-
 
       const jsonResponse = await response.json();
 
       if (response.status === 200) {
         console.log(jsonResponse);
-        dataSesion( true );
-        
+        dataSesion(true);
       }
     } catch (error) {
-      // Manejar el error de respuesta del backend
-
       console.log(error);
 
       if (error.response) {
@@ -69,10 +55,6 @@ export const Login = ({dataSesion}) => {
       }
     }
   };
-
-  // const handleRegistroClick = () => {
-  //   history.push('/usuarios'); //Ruta para crear un registro
-  // };
 
   return (
     <>
@@ -100,7 +82,7 @@ export const Login = ({dataSesion}) => {
           </div>
           <br />
           <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
-          <button className="btn btn-secondary"  to='/login'>Ir a Registro</button>
+          <Link className='link-style' to="/usuarios">Registrarse</Link>
         </form>
       </div>
     </>

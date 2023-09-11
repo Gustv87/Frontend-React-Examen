@@ -12,7 +12,11 @@ import { Menu } from './componentes/Menu'
 import { Direccion } from './componentes/Direccion/Direccion'
 import { Factura } from './componentes/Factura'
 import { Comprar } from './componentes/Comprar'
+import { ItemCarrito } from './componentes/ItemCarrito/ItemCarrito';
+import {Carrito } from './componentes/Carrito/Carrito';
+import { CarroContext } from './componentes/CarroContext/ContextCarrito';
 import { useState } from 'react';
+
 
 function App() {
 
@@ -44,6 +48,9 @@ function App() {
        { inicioSesion && <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>}
        { inicioSesion && <Route path='/productos' element={<Productos />}  ></Route>}
        { inicioSesion && <Route path='/comprar' element={<Comprar />}  ></Route>}
+       { inicioSesion && <Route path='/carrito' element={<Carrito />}  ></Route>}
+       { inicioSesion && <Route path='/itemcarrito' element={<ItemCarrito />}  ></Route>}
+       { inicioSesion && <Route path='/contextcarrito' element={<CarroContext />}  ></Route>}
         { inicioSesion && <Route path='*' element={<Default />}  ></Route>}
         { inicioSesion==false && <Route path='*' element={<Login />}  ></Route>}
 

@@ -15,23 +15,6 @@ import { Comprar } from './componentes/Comprar'
 import { useState } from 'react';
 
 function App() {
-  const [allProducts, setAllProducts] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [countProducts, setCountProducts] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const PrivateRoute = ({ element, path }) => {
-    return isLoggedIn ? (
-      <Route path={path} element={element} />
-    ) : (
-      <Navigate to="/login" replace />
-    );
-  };
-
-  PrivateRoute.propTypes = {
-    element: PropTypes.element.isRequired,
-    path: PropTypes.string.isRequired,
-  };
 
 
   const [inicioSesion , setInicioSesion] = useState(false);
@@ -52,7 +35,7 @@ function App() {
 
       { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {onInicioSesion}  />}  ></Route> }
       { inicioSesion &&  <Route path='/' element={<Inicio />}   ></Route> }    
-       { inicioSesion &&  <Route path='/usuarios' element={<Usuarios />}   ></Route> }
+         <Route path='/usuarios' element={<Usuarios />}   ></Route> 
        { inicioSesion && <Route path='/roles' element={<Roles />}  ></Route> }
        { inicioSesion && <Route path='/ciudad' element={<Ciudad />}  ></Route> }
        { inicioSesion && <Route path='/pais' element={<Pais />}  ></Route> }

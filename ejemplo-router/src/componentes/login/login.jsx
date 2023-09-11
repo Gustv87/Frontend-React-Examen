@@ -1,14 +1,17 @@
 
 import { useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 import './Login.css';
 
 
+// eslint-disable-next-line react/prop-types
 export const Login = ({dataSesion}) => {
 
 
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  // const history = useHistory();
 
   const url = "http://localhost:3000/api/login";
 
@@ -67,6 +70,10 @@ export const Login = ({dataSesion}) => {
     }
   };
 
+  // const handleRegistroClick = () => {
+  //   history.push('/usuarios'); //Ruta para crear un registro
+  // };
+
   return (
     <>
       <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
@@ -93,6 +100,7 @@ export const Login = ({dataSesion}) => {
           </div>
           <br />
           <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
+          <button className="btn btn-secondary"  to='/login'>Ir a Registro</button>
         </form>
       </div>
     </>

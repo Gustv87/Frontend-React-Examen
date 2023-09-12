@@ -11,7 +11,6 @@ import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
 import { Direccion } from './componentes/Direccion/Direccion'
 import { Factura } from './componentes/Factura'
-
 import { useState } from 'react';
 
 
@@ -21,6 +20,7 @@ function App() {
   const [inicioSesion , setInicioSesion] = useState(false);
 
   const onInicioSesion = (val) =>{
+    console.log(val);
     setInicioSesion(val);
   }
 
@@ -34,8 +34,8 @@ function App() {
       
       <Routes>
 
-      { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {onInicioSesion}  />}  ></Route> }
-      { inicioSesion &&  <Route path='/' element={<Inicio />}   ></Route> }    
+       { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {onInicioSesion}  />}  ></Route> }
+       { inicioSesion &&  <Route path='/' element={<Inicio />}   ></Route> }    
          <Route path='/usuarios' element={<Usuarios />}   ></Route> 
        { inicioSesion && <Route path='/roles' element={<Roles />}  ></Route> }
        { inicioSesion && <Route path='/ciudad' element={<Ciudad />}  ></Route> }

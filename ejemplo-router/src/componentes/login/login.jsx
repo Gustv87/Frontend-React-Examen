@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
 
-export const Login = ( dataSesion ) => {
+export const Login = ( {dataSesion} ) => {
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -41,9 +41,9 @@ export const Login = ( dataSesion ) => {
 
       const jsonResponse = await response.json();
 
-      if (response.status === 200) {
+      if (response.status == 200) {
         console.log(jsonResponse);
-        dataSesion(true);
+        dataSesion ( true );
       }
     } catch (error) {
       console.log(error);

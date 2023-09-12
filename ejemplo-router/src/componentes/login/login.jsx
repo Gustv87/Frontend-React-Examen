@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Login.css';
+
 
 export const Login = ( {dataSesion} ) => {
   const [correo, setCorreo] = useState('');

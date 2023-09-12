@@ -71,7 +71,9 @@ export const Productos = () => {
 
   return (
     <>
-      <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+   
+   <div className="container center" style={{ maxWidth: "50%", margin: "0 auto", padding: "40px" }}>
+
         <h1 className="text-center">Crear Producto</h1>
 
         <form onSubmit={postProducto}>

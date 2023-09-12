@@ -11,10 +11,10 @@ import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
 import { Direccion } from './componentes/Direccion/Direccion'
 import { Factura } from './componentes/Factura'
-import { Comprar } from './componentes/Comprar'
-import { ItemCarrito } from './componentes/ItemCarrito/ItemCarrito';
-import {Carrito } from './componentes/Carrito/Carrito';
-import { CarroContext } from './componentes/CarroContext/ContextCarrito';
+//import { Comprar } from './componentes/Comprar'
+//import { ItemCarrito } from './componentes/ItemCarrito/ItemCarrito';
+//import {Carrito } from './componentes/Carrito/Carrito';
+//import { CarroContext } from './componentes/CarroContext/ContextCarrito';
 import { useState } from 'react';
 
 
@@ -24,6 +24,7 @@ function App() {
   const [inicioSesion , setInicioSesion] = useState(false);
 
   const onInicioSesion = (val) =>{
+    console.log(val);
     setInicioSesion(val);
   }
 
@@ -37,8 +38,8 @@ function App() {
       
       <Routes>
 
-      { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {onInicioSesion}  />}  ></Route> }
-      { inicioSesion &&  <Route path='/' element={<Inicio />}   ></Route> }    
+       { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {onInicioSesion}  />}  ></Route> }
+       { inicioSesion &&  <Route path='/' element={<Inicio />}   ></Route> }    
          <Route path='/usuarios' element={<Usuarios />}   ></Route> 
        { inicioSesion && <Route path='/roles' element={<Roles />}  ></Route> }
        { inicioSesion && <Route path='/ciudad' element={<Ciudad />}  ></Route> }
@@ -47,12 +48,9 @@ function App() {
        { inicioSesion && <Route path='/factura' element={<Factura />}  ></Route> }
        { inicioSesion && <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>}
        { inicioSesion && <Route path='/productos' element={<Productos />}  ></Route>}
-       { inicioSesion && <Route path='/comprar' element={<Comprar />}  ></Route>}
-       { inicioSesion && <Route path='/carrito' element={<Carrito />}  ></Route>}
-       { inicioSesion && <Route path='/itemcarrito' element={<ItemCarrito />}  ></Route>}
-       { inicioSesion && <Route path='/contextcarrito' element={<CarroContext />}  ></Route>}
-        { inicioSesion && <Route path='*' element={<Default />}  ></Route>}
-        { inicioSesion==false && <Route path='*' element={<Login />}  ></Route>}
+       
+       { inicioSesion && <Route path='*' element={<Default />}  ></Route>}
+       { inicioSesion==false && <Route path='*' element={<Login />}  ></Route>}
 
       </Routes>
     </>

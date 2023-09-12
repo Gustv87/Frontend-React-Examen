@@ -74,7 +74,7 @@ export const Productos = () => {
 
   return (
     <>
-      <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+      <div className="container" style={{ maxWidth: "500px", margin: "0 auto", padding: "20px" }}>
         <h1 className="text-center">Crear Producto</h1>
 
         <form onSubmit={postProducto}>
@@ -111,7 +111,10 @@ export const Productos = () => {
           <br /><br />
         </form>
 
-        <div className="card-container">
+
+
+      </div>
+      <div className="card-container" style={{ maxWidth: "1000px", margin: "0 auto", padding: "20px" }}>
   {datos.map((x) => (
     <Card key={x.id_producto} style={{ width: '18rem', margin: '10px' }}>
       <Card.Img variant="top" src={`data:image/png;base64,${x.foto}`} />
@@ -124,7 +127,6 @@ export const Productos = () => {
   ))}
 </div>
 
-      </div>
     </>
   );
 };

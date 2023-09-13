@@ -91,13 +91,13 @@ export const Catalogo = ({
   };
   const onAddProduct = product => {
 		if (allProduct.find(item => item.id === product.id_producto)) {
-			const products = allProducts.map(item =>
+			const products = allProduct.map(item =>
 				item.id === product.id_producto
 					? { item, quantity: item.quantity + 1 }
 					: item
 			);
 		
-			return setAllProduct([...products]);
+			return setAllProduct([products]);
 		}
 
 		

@@ -5,7 +5,8 @@ import { Roles } from './componentes/Roles'
 import { Ciudad } from './componentes/Ciudad/Ciudad'
 import { Pais } from './componentes/Pais/Pais'
 import { Productos } from './componentes/Productos/Productos'
-import { Inicio } from './componentes/Inicio'
+import { Catalogo } from './componentes/Catalogo/Catalogo'
+import { Inicio } from './componentes/Inicio/Inicio'
 import { FacturaDetalle } from './componentes/FacturaDetalle'
 import { Routes, Route } from 'react-router-dom'
 import { Menu } from './componentes/Menu'
@@ -44,7 +45,7 @@ function App() {
        { inicioSesion && <Route path='/factura' element={<Factura />}  ></Route> }
        { inicioSesion && <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>}
        { inicioSesion && <Route path='/productos' element={<Productos />}  ></Route>}
-
+       { inicioSesion && <Route path='/catalogo' element={<Catalogo />}  ></Route>}
         { inicioSesion && <Route path='*' element={<Default />}  ></Route>}
         { inicioSesion==false && <Route path='*' element={<Login />}  ></Route>}
 

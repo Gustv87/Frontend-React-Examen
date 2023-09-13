@@ -1,15 +1,33 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Modal from 'react-bootstrap/Modal';
+import { TableHTMLAttributes } from "react";
 import './Catalogo.css';
 
 const url = "http://localhost:3000/api/producto";
 
-export const Catalogo = () => {
-    const [datos, setDatos] = useState([]);
+export const Catalogo = ({
+}) => {
+  const [allProduct, setAllProduct] = useState([]);
+  const [countProduct, setCountProduct] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [active, setActive] = useState(false);
+
+
+
+  const [datos, setDatos] = useState([]);
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
   const [file, setFile] = useState(null);
+
+
+//modal flotante
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const getProducto = async () => {
     try {
@@ -71,20 +89,101 @@ export const Catalogo = () => {
       console.error(error);
     }
   };
+  const onAddProduct = product => {
+		if (allProduct.find(item => item.id === product.id_producto)) {
+			const products = allProducts.map(item =>
+				item.id === product.id_producto
+					? { item, quantity: item.quantity + 1 }
+					: item
+			);
+		
+			return setAllProduct([...products]);
+		}
 
-  
+		
+		setAllProduct([allProduct, product]);
+	};
+
+
+ 
+
   return (
-    <div className="card-container" style={{ maxWidth: "1000px", margin: "0 auto", padding: "20px" }}>
-    {datos.map((x) => (
-      <Card key={x.id_producto} style={{ width: '18rem', margin: '10px' }}>
-        <Card.Img variant="top" src={`data:image/png;base64,${x.foto}`} />
-        <Card.Body>
-          <Card.Title>{x.nombre}</Card.Title>
-          <Card.Text>{x.precio}</Card.Text>
-          <Button variant="primary">Agregar al carrito</Button>
-        </Card.Body>
-      </Card>
-    ))}
-  </div>
+
+    <>
+
+    
+      <Container className="m-5">
+      <Button variant="primary"  onClick={handleShow}>
+        Carrito
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <>
+        <div>
+					{allProduct.length ? (
+						<>
+							<div className='row-product'>
+								{allProduct.map(product => (
+
+                  
+									<tr  key={product.id_producto}>
+										<div className='info-cart-product'>
+								
+											<td className='titulo-producto-carrito'>
+												{product.nombre}
+											</td>
+											<td className='precio-producto-carrito'>
+												{product.precio}
+											</td>
+										</div>
+										
+									</tr>
+								))}
+							</div>
+
+					
+
+						
+						</>
+					) : (
+						<p className='cart-empty'>El carrito está vacío</p>
+					)}
+				</div>
+        </>
+   
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      </Container>
+
+   
+      
+
+
+      <div className="card-container" style={{ maxWidth: "1000px", margin: "0 auto", padding: "20px" }}>
+        {datos.map((product) => (
+          <Card key={product.id_producto} style={{ width: '18rem', margin: '10px' }}>
+            <Card.Img variant="top" src={`data:image/png;base64,${product.foto}`} />
+            <Card.Body>
+              <Card.Title>{product.nombre}</Card.Title>
+              <Card.Text>{product.precio}</Card.Text>
+              <Button variant="primary" onClick={() => onAddProduct(product)}>Agregar al carrito</Button>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
+
+    </>
   )
 }

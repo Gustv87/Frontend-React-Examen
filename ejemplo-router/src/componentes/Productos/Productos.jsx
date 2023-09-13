@@ -1,7 +1,7 @@
 import  { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import './Productos.css';
+
 
 const url = "http://localhost:3000/api/producto";
 
@@ -121,7 +121,7 @@ export const Productos = () => {
       <Card.Body>
         <Card.Title>{x.nombre}</Card.Title>
         <Card.Text>{x.precio}</Card.Text>
-        <Button variant="primary">Agregar al carrito</Button>
+   
       </Card.Body>
     </Card>
   ))}

@@ -65,7 +65,7 @@ export const Usuarios = () => {
 
   return (
     <>
-      <div className="container" style={{ maxWidth: "100%", margin: "0 auto", padding: "20px" }}>
+      <div className="container" style={{ maxWidth: "50%", margin: "0 auto", padding: "40px" }}>
         <h1 className="text-center">Registro Usuario</h1>
         {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={postUsuario}>

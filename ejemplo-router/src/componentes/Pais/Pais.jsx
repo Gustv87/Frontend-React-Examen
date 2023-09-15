@@ -5,6 +5,7 @@ let url = "http://localhost:3000/api/pais";
 export const Pais = () => {
   const [datos, setDatos] = useState([]);
   const [nombre, setNombre] = useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const getPais = async () => {
     try {
@@ -15,7 +16,6 @@ export const Pais = () => {
       const data = await response.json();
 
       setDatos(data);
-      
     } catch (error) {
       console.error(error);
     }
@@ -50,15 +50,35 @@ export const Pais = () => {
 
       // Limpiar el campo de nombre después de enviar
       setNombre("");
+
+      // Mostrar el mensaje de éxito
+      showSuccess();
     } catch (error) {
       console.error(error);
     }
   };
 
+  // Función para mostrar el mensaje de éxito
+  const showSuccess = () => {
+    setShowSuccessMessage(true);
+
+    // Ocultar el mensaje después de unos segundos (por ejemplo, 3 segundos)
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 3000);
+  };
+
   return (
     <>
-      <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
-        <h1 className="text-center">Crear Pais</h1>
+      <div className="container center" style={{ maxWidth: "50%", margin: "0 auto", padding: "40px" }}>
+        <h1 className="text-center">Crear País</h1>
+
+        {/* Mostrar mensaje de éxito si showSuccessMessage es true */}
+        {showSuccessMessage && (
+          <div className="alert alert-success">
+            País creado con éxito.
+          </div>
+        )}
 
         <form onSubmit={postPais}>
           <div className="mb-3">
@@ -79,16 +99,14 @@ export const Pais = () => {
         <table className="table">
           <thead className="table-dark">
             <tr>
-              
               <th className="text-center">Nombre</th>
-              
               <th className="text-center">Accion</th>
             </tr>
           </thead>
           <tbody>
             {datos.map((x) => (
               <tr key={x.id_pais}>
-                <td >{x.nombre}</td>
+                <td>{x.nombre}</td>
                 <td className="text-center">
                   <button type="button" className="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">

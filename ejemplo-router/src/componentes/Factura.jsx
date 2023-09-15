@@ -1,85 +1,84 @@
-import {React , useEffect, useState} from 'react'
+import { React, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/esm/Container'
 
-var url  = "http://localhost:3000/api/factura";
+var url = "http://localhost:3000/api/factura";
 
 export const Factura = () => {
 
-  const [datos , setDatos] = useState([]);
+  const [datos, setDatos] = useState([]);
 
-  const consumoFactura = async ()=>{
+  const consumoFactura = async () => {
 
-      const response = await fetch(url);
-      const data = await response.json(); 
-      setDatos(data);
+    const response = await fetch(url);
+    const data = await response.json();
+    setDatos(data);
 
   };
 
-  useState( ()=>{
+  useState(() => {
 
     consumoFactura();
 
   }, []);
 
   return (
-    
+
     <>
 
-<h1 className="text-center">Crear Factura </h1>
+      <div className="container" style={{ maxWidth: "50%", margin: "0 auto", padding: "40px" }}>
 
-<form >
-  <div className="mb-3">
-    <label className="form-label">Correo</label>
-    <input
-      type="email"
-      className="form-control"
-      
-    />
-  </div>
-  <div className="mb-3">
-    <label className="form-label">Fecha</label>
-    <input
-      type="date"
-      className="form-control"
-    />
-  </div>
+        <h1 className="text-center">Crear Factura </h1>
 
-  <button type="submit" className="btn btn-primary">
-    Crear Factura
-  </button>
-  <br /><br />
-</form>
+        <form >
+          <div className="mb-3">
+            <label className="form-label">Correo</label>
+            <input
+              type="email"
+              className="form-control"
 
-        <Container fluid="md mt-5">
-        
-        <Row className='justify-content-md-center '>
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Fecha</label>
+            <input
+              type="date"
+              className="form-control"
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Crear Factura
+          </button>
+          <br /><br />
+        </form>
+
+
+
+
         <h1 className='text-center p-3'>Reporte de Factura</h1>
-            <Col className='col-lg-6 col-sm-12'>  
-                
-              <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th className='text-center'>Id Factura</th>
-              <th className='text-center'>Correo</th>
-              <th className='text-center'>Id Direccion</th>
-              <th className='text-center'>Fecha</th>
-              <th className='text-center'>Activo</th>
-              <th className='text-center'>Fecha_borra</th>
+   
+
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th className='text-center'>Id Factura</th>
+                <th className='text-center'>Correo</th>
+                <th className='text-center'>Id Direccion</th>
+                <th className='text-center'>Fecha</th>
+                <th className='text-center'>Activo</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              {datos.map(x => <tr key={x.id_factura}><td>{x.id_factura}</td><td>{x.correo}</td><td>{x.id_direccion}</td><td>{x.fecha}</td><td>{x.activo}</td></tr>)}
+            </tbody>
+          </Table>
 
 
-
-            </tr>
-          </thead>
-          <tbody>
-            { datos.map( x=> <tr key={x.id_factura}><td>{x.id_factura}</td><td>{x.correo}</td><td>{x.id_direccion}</td><td>{x.fecha}</td><td>{x.activo}</td><td>{x.fecha_borra}</td></tr>) }
-          </tbody>
-        </Table></Col>
-        </Row>
-    </Container>
-
+      </div>
     </>
   )
 }

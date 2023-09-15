@@ -1,17 +1,16 @@
+
 import { React, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/esm/Container'
 
-
 var url = "http://localhost:3000/api/rol";
 
 export const Roles = () => {
-
   const [datos, setDatos] = useState([]);
   const [nombre, setNombre] = useState("");
-
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // Estado para mostrar el mensaje de éxito
 
   const getRol = async () => {
     try {
@@ -20,9 +19,7 @@ export const Roles = () => {
         throw new Error('Error al obtener datos del servidor');
       }
       const data = await response.json();
-
       setDatos(data);
-
     } catch (error) {
       console.error(error);
     }
@@ -52,28 +49,41 @@ export const Roles = () => {
         throw new Error('Error al enviar datos al servidor');
       }
 
-
       getRol();
 
       // Limpiar el campo de nombre después de enviar
       setNombre("");
+
+      // Mostrar el mensaje de éxito
+      showSuccess();
     } catch (error) {
       console.error(error);
     }
   };
 
+  // Función para mostrar el mensaje de éxito
+  const showSuccess = () => {
+    setShowSuccessMessage(true);
 
+    // Ocultar el mensaje después de unos segundos (por ejemplo, 3 segundos)
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 3000);
+  };
 
   return (
     <>
-      <Container fluid="md">
-        <Col className='justify-content-md-center'>
-          <h1 className='text-center p-3'>Ingresar Rol</h1>
-        </Col>
+      <div className="container center" style={{ maxWidth: "50%", margin: "0 auto", padding: "40px" }}>
+        <h1 className='text-center p-3'>Ingresar Rol</h1>
 
-        <Row  className='justify-content-md-center' >
-          <Col className='col-sm-12 col-lg-6' >
-          <form onSubmit={postRol}>
+        {/* Mostrar mensaje de éxito si showSuccessMessage es true */}
+        {showSuccessMessage && (
+          <div className="alert alert-success">
+            Rol creado con éxito.
+          </div>
+        )}
+
+        <form onSubmit={postRol}>
           <div className="mb-3">
             <label className="form-label">Nombre</label>
             <input
@@ -89,30 +99,23 @@ export const Roles = () => {
           <br /><br />
         </form>
 
-          </Col>
+        <h1 className='text-center p-3'>Reporte de Roles</h1>
 
-        </Row>
-      </Container>
-
-
-      <Container fluid="md mt-5">
-
-        <Row className='justify-content-md-center '>
-          <h1 className='text-center p-3'>Reporte de Roles</h1>
-          <Col className='col-lg-6 col-sm-12'>
-
-            <Table striped bordered hover>
-              <thead className='table-dark'>
-                <tr>
-                  <th className='text-center'>ID</th>
-                  <th className='text-center'>NOMBRE ROL</th>
-                  <th className='text-center'></th>
-                </tr>
-              </thead>
-              <tbody>
-                {datos.map(x => <tr key={x.id_rol}><td>{x.id_rol}</td><td>{x.nombre}</td>
+        <Table striped bordered hover>
+          <thead className='table-dark'>
+            <tr>
+              <th className='text-center'>ID</th>
+              <th className='text-center'>NOMBRE ROL</th>
+              <th className='text-center'></th>
+            </tr>
+          </thead>
+          <tbody>
+            {datos.map(x => (
+              <tr key={x.id_rol}>
+                <td>{x.id_rol}</td>
+                <td>{x.nombre}</td>
                 <td className="text-center">
-                  <button type="button" className="btn btn-primary">
+                <button type="button" className="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">
                       <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                     </svg>
@@ -125,13 +128,11 @@ export const Roles = () => {
                     </svg>
                   </button>
                 </td>
-                
-                </tr>)}
-              </tbody>
-            </Table></Col>
-        </Row>
-      </Container>
-
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </>
-  )
-}
+  );
+};

@@ -58,7 +58,7 @@ export const Login = ( {dataSesion} ) => {
 
   return (
     <>
-      <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+      <div className="container" style={{ maxWidth: "550px", margin: "0 auto", padding: "40px" }}>
         <h1 className="text-center">Iniciar Sesión</h1>
         {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={handleSubmit}>

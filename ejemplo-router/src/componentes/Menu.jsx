@@ -10,7 +10,12 @@ export const Menu = () => {
     <>
       <Navbar bg="dark" expand="lg" variant="dark">
         <Container>
-          <Navbar.Brand as={Link} to="/">Inicio</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+            <img alt="" src=".\src\assets\medalla.png" width="30" height="30" className="d-inline-block align-top"
+            />{' '}
+            DLUJO Store
+          </Navbar.Brand>
+        
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto ms-auto mb-2 mb-lg-0">
@@ -22,6 +27,7 @@ export const Menu = () => {
               <Nav.Link as={Link} to="/factura">Factura</Nav.Link>
               <Nav.Link as={Link} to="/facturadetalle">Detalle de Factura</Nav.Link>
               <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
+              <Nav.Link as={Link} to="/productos">Catalogo</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

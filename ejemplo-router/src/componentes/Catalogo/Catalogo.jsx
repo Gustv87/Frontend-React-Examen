@@ -22,9 +22,10 @@ export const Catalogo = ({
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
   const [file, setFile] = useState(null);
+  const [quantity, setQuantity] = useState(null);
 
 
-//modal flotante
+  //modal flotante
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -89,86 +90,103 @@ export const Catalogo = ({
       console.error(error);
     }
   };
+
+
+
+
   const onAddProduct = product => {
-		if (allProduct.find(item => item.id === product.id_producto)) {
-			const products = allProduct.map(item =>
-				item.id === product.id_producto
-					? { item, quantity: item.quantity + 1 }
-					: item
-			);
-		
-			return setAllProduct([products]);
-		}
+    if (allProduct.find(item => item.id === product.id_producto)) {
+      const products = allProduct.map(item =>
+        item.id === product.id_producto
+          ? {item, quantity: item.quantity + 1 }
+          : item
+      );
+      setTotal(total + product.precio * product.quantity);
+      return setAllProduct([products]);
+    }
 
-		
-		setAllProduct([allProduct, product]);
-	};
+    setTotal(total + product.precio * product.quantity);
+    setAllProduct([...  allProduct, product]);
+  };
 
-
- 
 
   return (
 
     <>
 
-    
+
       <Container className="m-5">
-      <Button variant="primary"  onClick={handleShow}>
-        Carrito
-      </Button>
+        <Button variant="primary" onClick={handleShow}>
+          Carrito
+        </Button>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <>
-        <div>
-					{allProduct.length ? (
-						<>
-							<div className='row-product'>
-								{allProduct.map(product => (
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <>
+              <div>
+                {allProduct.length ? (
+                  <>
+                    <div className='row-product'>
+                      <table class="table" >
+                        <thead>
+                          <tr>
 
-                  
-									<tr  key={product.id_producto}>
-										<div className='info-cart-product'>
-								
-											<td className='titulo-producto-carrito'>
-												{product.nombre}
-											</td>
-											<td className='precio-producto-carrito'>
-												{product.precio}
-											</td>
-										</div>
-										
-									</tr>
-								))}
-							</div>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                          </tr>
+                        </thead>
 
-					
+                      </table>
+                      {allProduct.map(product => (
 
-						
-						</>
-					) : (
-						<p className='cart-empty'>El carrito está vacío</p>
-					)}
-				</div>
-        </>
-   
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+                        <table class="table" >
+
+                          <tbody>
+                            <tr key={product.id_producto}>
+
+                              <td>{product.quantity}</td>
+                              <td>{product.nombre}</td>
+                              <td>L.{product.precio}</td>
+                     
+                            </tr>
+
+                          </tbody>
+                        </table>
+
+                      ))}
+                    </div>
+                    <div className='cart-total'>
+                      <h3>Total:</h3>
+                      <span className='total-pagar'>L.{total}</span>
+                    </div>
+
+
+
+                  </>
+                ) : (
+                  <p className='cart-empty'>El carrito está vacío</p>
+                )}
+              </div>
+            </>
+
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Container>
 
-   
-      
+
+
 
 
       <div className="card-container" style={{ maxWidth: "1000px", margin: "0 auto", padding: "20px" }}>

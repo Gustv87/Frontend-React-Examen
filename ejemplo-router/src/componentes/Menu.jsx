@@ -27,7 +27,7 @@ export const Menu = () => {
               <Nav.Link as={Link} to="/factura">Factura</Nav.Link>
               <Nav.Link as={Link} to="/facturadetalle">Detalle de Factura</Nav.Link>
               <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
-              <Nav.Link as={Link} to="/productos">Catalogo</Nav.Link>
+              <Nav.Link as={Link} to="/catalogo">Catalogo</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

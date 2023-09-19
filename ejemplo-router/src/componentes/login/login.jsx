@@ -43,8 +43,7 @@ export const Login = ( {dataSesion} ) => {
 
       if (response.status == 200) {
         console.log(jsonResponse);
-        dataSesion ( true );
-      }
+        dataSesion ( jsonResponse.user.id_rol)  }
     } catch (error) {
       console.log(error);
 

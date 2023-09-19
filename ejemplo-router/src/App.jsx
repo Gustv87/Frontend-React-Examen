@@ -18,35 +18,41 @@ import { useState } from 'react';
 function App() {
 
 
-  const [inicioSesion , setInicioSesion] = useState(false);
+  const [inicioSesion, setInicioSesion] = useState(false);
+  const [id_rol, setId_rol] = useState(0);
 
-  const onInicioSesion = (val) =>{
+
+  const onInicioSesion = (val) => {
     console.log(val);
+    setId_rol(val);
     setInicioSesion(val);
   }
+
+
 
 
   return (
     <>
 
-      
-      { inicioSesion && <Menu /> }
-      
+
+      {inicioSesion && <Menu auth={id_rol}/>}
+
       <Routes>
 
-       { inicioSesion ==false && <Route path='/' element={<Login dataSesion = {onInicioSesion}  />}  ></Route> }
-       { inicioSesion &&  <Route path='/' element={<Inicio />}   ></Route> }    
-         <Route path='/usuarios' element={<Usuarios />}   ></Route> 
-       { inicioSesion && <Route path='/roles' element={<Roles />}  ></Route> }
-       { inicioSesion && <Route path='/ciudad' element={<Ciudad />}  ></Route> }
-       { inicioSesion && <Route path='/pais' element={<Pais />}  ></Route> }
-       { inicioSesion && <Route path='/direccion' element={<Direccion />}  ></Route> }
-       { inicioSesion && <Route path='/factura' element={<Factura />}  ></Route> }
-       { inicioSesion && <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>}
-       { inicioSesion && <Route path='/productos' element={<Productos />}  ></Route>}
-       { inicioSesion && <Route path='/catalogo' element={<Catalogo />}  ></Route>}
-        { inicioSesion && <Route path='*' element={<Default />}  ></Route>}
-        { inicioSesion==false && <Route path='*' element={<Login />}  ></Route>}
+        {inicioSesion == false && <Route path='/' element={<Login dataSesion={onInicioSesion} />}  ></Route>}
+        {inicioSesion && id_rol == 1 && <Route path='/' element={<Inicio />}   ></Route>}
+        {inicioSesion && id_rol == 2 && <Route path='/' element={<Catalogo />}   ></Route>}
+        {inicioSesion && id_rol == 1 && <Route path='/usuarios' element={<Usuarios />}   ></Route>}
+        {inicioSesion && id_rol == 1 && <Route path='/roles' element={<Roles />}  ></Route>}
+        {inicioSesion && id_rol == 1 && <Route path='/ciudad' element={<Ciudad />}  ></Route>}
+        {inicioSesion && id_rol == 1 && <Route path='/pais' element={<Pais />}  ></Route>}
+        {inicioSesion && id_rol == 1 && <Route path='/direccion' element={<Direccion />}  ></Route>}
+        {inicioSesion && id_rol == 1 && <Route path='/factura' element={<Factura />}  ></Route>}
+        {inicioSesion && id_rol == 2 && <Route path='/facturadetalle' element={<FacturaDetalle />}  ></Route>}
+        {inicioSesion && id_rol == 2 && <Route path='/productos' element={<Productos />}  ></Route>}
+        {inicioSesion && id_rol == 2 && <Route path='/catalogo' element={<Catalogo />}  ></Route>}
+        {inicioSesion && <Route path='*' element={<Default />}  ></Route>}
+        {inicioSesion == false && <Route path='*' element={<Login />}  ></Route>}
 
       </Routes>
     </>

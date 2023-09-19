@@ -8,6 +8,7 @@ import { TableHTMLAttributes } from "react";
 import './Catalogo.css';
 
 const url = "http://localhost:3000/api/producto";
+const urlFac = "http://localhost:3000/api/factura";
 
 export const Catalogo = ({
 }) => {
@@ -23,6 +24,8 @@ export const Catalogo = ({
   const [precio, setPrecio] = useState("");
   const [file, setFile] = useState(null);
   const [quantity, setQuantity] = useState(null);
+  const [cantidadTotal, setCantidadTotal] = useState("");
+  const [precioTotal, setPrecioTotal]= useState("");
 
 
   //modal flotante
@@ -46,15 +49,29 @@ export const Catalogo = ({
   useEffect(() => {
     getProducto();
   }, []);
+  const handleClick = () => {
+    // Cambiar el valor de miVariable
+    setCantidadTotal(countProduct)
+  };
+  const handleClickPrecio = () => {
+    // Cambiar el valor de miVariable
+    setPrecioTotal(total)
+  };
 
   const handleNombreChange = (event) => {
     setNombre(event.target.value);
   };
 
+   const handleCantidadTotalChange = (event) => {
+    setCantidadTotal(event.target.span);
+  };
+
   const handlePrecioChange = (event) => {
     setPrecio(event.target.value);
   };
-
+  const handlePrecioTotalChange = (event) => {
+    setPrecioTotal(event.target.span);
+  };
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
@@ -91,22 +108,51 @@ export const Catalogo = ({
     }
   };
 
+  const postFactura = async (event) => {
+    event.preventDefault();
 
+    try {
+      const response = await fetch(urlFac, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ cantidadTotal, precioTotal}), 
+      });
 
+      if (!response.ok) {
+        throw new Error("Error al enviar datos al servidor");
+      }
+
+      // Actualizar la lista de datos después de enviar la nueva dirección
+      getDireccion();
+
+      // Limpiar los campos después de enviar
+      setDireccion("");
+      setDescripcion("");
+      setCorreo("");
+      setCiudadId(""); 
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const onAddProduct = product => {
     if (allProduct.find(item => item.id === product.id_producto)) {
       const products = allProduct.map(item =>
         item.id === product.id_producto
-          ? {item, quantity: item.quantity + 1 }
+          ? { ...item, quantity: item.quantity + 1 }
           : item
       );
+
       setTotal(total + product.precio * product.quantity);
+      setCountProduct(countProduct + product.quantity);
       return setAllProduct([products]);
     }
 
     setTotal(total + product.precio * product.quantity);
-    setAllProduct([...  allProduct, product]);
+    setCountProduct(countProduct + product.quantity);
+    setAllProduct([...allProduct, product]);
   };
 
 
@@ -115,16 +161,16 @@ export const Catalogo = ({
     <>
 
 
-      <Container className="m-5">
+      <Container className="m-5" onSubmit={postFactura}>
         <Button variant="primary" onClick={handleShow}>
           Carrito
         </Button>
 
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} onSubmit={postFactura}>
           <Modal.Header closeButton>
             <Modal.Title>Productos en Carrito</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body onSubmit={postFactura}>
             <>
               <div>
                 {allProduct.length ? (
@@ -159,9 +205,16 @@ export const Catalogo = ({
 
                       ))}
                     </div>
-                    <div className='cart-total'>
+                    <div className='cart-total' onSubmit={postFactura}>
+                      <h3>Cantidad:</h3>
+                      <span span={cantidadTotal} onChange={handleCantidadTotalChange}>{countProduct}</span>
+                      
+                     
+                    </div>
+                    <div className='cart-total' onSubmit={postFactura}>
                       <h3>Total:</h3>
-                      <span className='total-pagar'>L.{total}</span>
+                      
+                      <span className='total-pagar' span={precioTotal} onChange={handlePrecioTotalChange}>{total}</span>
                     </div>
 
 
@@ -175,11 +228,18 @@ export const Catalogo = ({
 
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" type="submit" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
+            <Button variant="primary" type="submit" onClick={(event) => {
+                if (cantidadTotal.trim() === '' || precioTotal.trim() === '') {
+                  event.preventDefault();
+                  alert('Los campos no pueden estar vacíos');
+                }else{
+                  alert('Se Agrego Correctamente');
+                }
+              }}>
+              Agregar Factura
             </Button>
           </Modal.Footer>
         </Modal>

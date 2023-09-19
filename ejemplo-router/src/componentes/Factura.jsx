@@ -48,6 +48,20 @@ export const Factura = () => {
               className="form-control"
             />
           </div>
+          <div className="mb-3">
+            <label className="form-label">Cantidad Total</label>
+            <input
+              type="number"
+              className="form-control"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Precio Total</label>
+            <input
+              type="number"
+              className="form-control"
+            />
+          </div>
 
           <button type="submit" className="btn btn-primary">
             Crear Factura

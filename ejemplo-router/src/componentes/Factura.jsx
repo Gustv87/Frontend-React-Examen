@@ -69,11 +69,13 @@ export const Factura = () => {
                 <th className='text-center'>Id Direccion</th>
                 <th className='text-center'>Fecha</th>
                 <th className='text-center'>Activo</th>
+                <th className='text-center'>Cantidad Total</th>
+                <th className='text-center'>Precios Total</th>
                
               </tr>
             </thead>
             <tbody>
-              {datos.map(x => <tr key={x.id_factura}><td>{x.id_factura}</td><td>{x.correo}</td><td>{x.id_direccion}</td><td>{x.fecha}</td><td>{x.activo}</td></tr>)}
+              {datos.map(x => <tr key={x.id_factura}><td>{x.id_factura}</td><td>{x.correo}</td><td>{x.id_direccion}</td><td>{x.fecha}</td><td>{x.activo}</td><td>{x.cantidadTotal}</td><td>{x.precioTotal}</td></tr>)}
             </tbody>
           </Table>
 
